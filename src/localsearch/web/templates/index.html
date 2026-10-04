@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Local Document Search</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <header>
+    <h1>Local Document Search</h1>
+    <p class="subtitle">Your documents stay on this machine.</p>
+  </header>
+
+  <main>
+    <!-- Configuration -->
+    <section id="config-section">
+      <h2>Documents folder</h2>
+      <div class="row">
+        <input type="text" id="folder-path" placeholder="/Users/you/Documents" spellcheck="false">
+        <button id="save-folder">Save</button>
+      </div>
+      <div class="row">
+        <label><input type="checkbox" id="auto-reindex"> Re-index automatically when files change</label>
+      </div>
+      <div class="row">
+        <label for="ollama-model">Ollama model</label>
+        <input type="text" id="ollama-model" spellcheck="false">
+        <button id="save-model">Save</button>
+      </div>
+      <p id="config-message" class="message" hidden></p>
+    </section>
+
+    <!-- Indexing -->
+    <section id="index-section">
+      <h2>Index</h2>
+      <div class="row">
+        <button id="start-index">Start indexing</button>
+        <span id="index-summary" class="muted"></span>
+      </div>
+      <p id="stale-notice" class="notice" hidden></p>
+      <div id="progress" hidden>
+        <progress id="progress-bar" value="0" max="1"></progress>
+        <p id="progress-text" class="muted"></p>
+      </div>
+      <details id="skipped-details" hidden>
+        <summary>Skipped documents (<span id="skipped-count">0</span>)</summary>
+        <ul id="skipped-list"></ul>
+      </details>
+    </section>
+
+    <!-- Search -->
+    <section id="search-section">
+      <h2>Search</h2>
+      <form id="search-form" class="row">
+        <input type="text" id="query" placeholder="Ask in plain language&hellip;" autocomplete="off">
+        <button type="submit">Search</button>
+      </form>
+      <div class="row">
+        <button id="summarize" disabled>Summarize results</button>
+        <span id="summarize-reason" class="muted"></span>
+      </div>
+      <p id="search-message" class="message" hidden></p>
+      <div id="summary" hidden>
+        <h3>Summary <span id="summary-model" class="muted"></span></h3>
+        <p id="summary-text"></p>
+        <p id="summary-sources" class="muted"></p>
+      </div>
+      <ol id="results"></ol>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

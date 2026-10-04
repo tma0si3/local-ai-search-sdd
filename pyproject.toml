@@ -1,0 +1,47 @@
+[project]
+name = "localsearch"
+version = "0.1.0"
+description = "Local semantic search over your own documents. Nothing leaves the machine."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn>=0.32",
+    "jinja2>=3.1",
+    "sentence-transformers>=3.3",
+    "numpy>=2.1",
+    "pypdf>=5.1",
+    "python-docx>=1.1",
+    "watchdog>=6.0",
+    "httpx>=0.28",
+]
+
+[project.scripts]
+localsearch = "localsearch.__main__:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "ruff>=0.8",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/localsearch"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+markers = [
+    "slow: loads the embedding model or indexes a large corpus",
+]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
